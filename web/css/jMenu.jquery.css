@@ -1,0 +1,68 @@
+
+#jMenu {
+	display:table;
+	margin:0;
+	padding:0;
+        font-size:15px
+}
+
+/********************/
+/** primer nivel **/
+/********************/
+#jMenu li {
+	display:table-cell;
+	background-color:#2F4F4F;
+	margin:0;
+        float:left;
+        z-index:1; 
+        
+}
+	#jMenu li a {
+		padding:10px;
+		display:block;
+		background-color: transparent;
+		color:#fff;
+		text-transform:uppercase;
+		cursor:pointer;
+		font-size:15px;
+	}
+	
+/*******************/
+/** segundo nivel **/
+/*******************/
+#jMenu li ul {
+	display:none;
+	position:absolute;
+	padding:0;
+	margin:0
+}
+	#jMenu li ul li {
+		background-color:#2F4F4F;
+		display:block;
+		border-bottom:1px solid #484548;
+		padding:0
+	}
+	#jMenu li ul li.arrow {
+		background:#2F4F4F url('../Images/arrow_down.png') no-repeat center center;
+		height:6px;
+		padding:0;
+		border-bottom:none;
+		padding-bottom:10px
+	}
+		#jMenu li ul li a {
+			font-size:13px;
+			text-transform:none;
+			padding:7px;
+			display:block;
+			border-top:1px solid transparent;
+			border-bottom:1px solid transparent;
+                        
+		}
+		#jMenu li ul li a.isParent {
+			background:#2F4F4F url('../Images/arrow_right.png') no-repeat right center;
+		}
+			#jMenu li ul li a:hover {
+				background-color:#514c52;
+				border-top:1px solid #2F4F4F;
+				border-bottom:1px solid #2F4F4F;
+			}

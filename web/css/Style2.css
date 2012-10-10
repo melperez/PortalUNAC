@@ -1,0 +1,178 @@
+/*Agosto - 2012*/
+/*Melissa Pérez CAdavid*/
+/*Tecnologia en sistemas Semestre IV*/
+
+body { }
+
+@font-face {
+    font-family: 'BonvenoCF';
+    src: url('Fuentes/BonvenoCF/BonvenoCF.eot');
+    src: local('BonvenoCF'), local('BonvenoCF'), url('Fuentes/BonvenoCF/BonvenoCF.woff') format('woff'), url('Fuentes/BonvenoCF/BonvenoCF.ttf') format('truetype'), url('Fuentes/BonvenoCF/BonvenoCF.svg#Notethis') format('svg');
+}
+
+@font-face {
+    font-family: 'KulminoituvaRegular';
+    src: url('Fuentes/kulminoituva/Kulminoituva.eot');
+    src: local('Kulminoituva Regular'), local('Kulminoituva'), url('Fuentes/kulminoituva/kulminoituva.woff') format('woff'), url('Fuentes/kulminoituva/kulminoituva.ttf') format('truetype'), url('Fuentes/kulminoituva/kulminoituva.svg#Kulminoituva') format('svg');
+}
+
+
+h4{
+    color:#808000;
+    text-align:justify;
+    font-family:BonvenoCF, Arial, sans-serif;
+    font-size:15px;
+}
+
+h2{
+    color:#FFFFFF;
+    text-align:justify;
+    font-family:BonvenoCF, Arial, sans-serif;
+}
+
+#msg1{
+    font-family: KulminoituvaRegular, Arial, Gadget, sans-serif;
+    font-size: 40px;
+    color:#D0FA58;
+}
+
+#errormsg {
+    font-family: KulminoituvaRegular, Arial , Gadget, sans-serif;
+    color: #B40404;
+    font-size: 40px;
+} 
+
+#msgini{
+    font-family: BonvenoCF, Arial, sans-serif;
+    font-size: 20px;
+    background-color:#FFFFFF;
+    height: 200px;
+    width:700px;
+    margin:auto;
+    border-radius: 5px;  
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0,  #BCBCBC), color-stop(1, #EFEFEF));
+    background-image: -webkit-linear-gradient(center bottom, #BCBCBC 37%, #EFEFEF 69%); 
+}
+
+#fondo {
+    height:600px;
+    background-color:#FFFFFF;
+    text-align:center; 
+    width:1200px;
+    margin:auto;
+    border-radius: 5px;
+
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0,  #BCBCBC), color-stop(1, #EFEFEF));
+    background-image: -webkit-linear-gradient(center bottom, #BCBCBC 37%, #EFEFEF 69%); 
+
+}
+
+#encabezado {
+    height:150px;   
+    width:1200px;
+    margin:auto;
+    background:#ffffff; 
+    border-radius: 5px;   
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0,  #BCBCBC), color-stop(1, #EFEFEF));
+    background-image: -webkit-linear-gradient(center bottom, #BCBCBC 37%, #EFEFEF 69%); 
+
+}
+
+#imagen {
+    float:left;
+    height:140px; 
+    width:180px; 
+    text-align:right; 
+    left:200px;
+    padding-right:5px;
+
+}
+
+#titulo {
+    float:left;
+    font-family:Times New Roman;
+    font-size:21px;
+    color:#2C2C2C;
+    text-shadow:2px 2px 2px #969696;
+    height:130px; 
+    width:420px; 
+    text-align:left;
+    padding-top:12px;
+}
+
+#titulo2 {
+    font-family:Times New Roman; font-size: 20px; top:5px; bottom:5px; width:1200px; margin:auto
+}
+
+form {
+    font-family:BonvenoCF, Arial, sans-serif;
+    font-size:15px;
+    z-index: 2;
+}
+
+input { 
+    border-radius: 5px;
+    width:210px;
+    height:25px;
+    border: 2px solid #C0C0C0;
+} 
+
+input:focus { border: 2px solid #800000; 
+              background-color:#FF8080}
+
+
+#login1 {
+    float:left;
+    height:100px;
+    width:220px;
+    text-align:left;
+    z-index:1;
+    padding-top:40px;
+
+}
+
+#login2{
+    float:left;
+    height:100px;
+    width:350px;
+    padding-top:40px;
+
+}
+
+#dialog1{
+    color:white; 
+    width:300px; 
+    height:70px; 
+    text-align:justify; 
+    text-shadow:2px 2px 2px #646464;
+    font-family:BonvenoCF, Arial, sans-serif;
+    font-size:15px;
+    z-index: 3;
+}
+
+.degradar2{
+    background:#BBBB00; /* Old browsers */
+    background-image: -moz-linear-gradient(center bottom,#DDDD00  37%,#FFFF71 69%);
+    background-image: -ms-linear-gradient(center bottom,#CCCC00 37%,#FFFF5E 69%);
+    background-image: -o-linear-gradient(center bottom,#CCCC00 37%,#FFFF5E 69%);
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, #DDDD00),color-stop(1,#FFFF5E);
+    background-image: -webkit-linear-gradient(center bottom,#DDDD00  37%,#FFFF71 69%);
+    width:100px;
+    height:50px;
+}
+
+
+.tamano{
+    width:300px;
+    height:30px;
+    border-radius:5px;
+}
+
+.conten_tab {
+    border-style:solid; 
+    border-color: #808000; 
+    border-radius:4px; 
+}
+
+
+

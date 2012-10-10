@@ -1,0 +1,106 @@
+/*Agosto - 2012*/
+/*Melissa Pérez CAdavid*/
+/*Tecnologia en sistemas Semestre IV*/
+@font-face {
+    font-family: 'BonvenoCF';
+    src: url('Fuentes/BonvenoCF/BonvenoCF.eot');
+    src: local('BonvenoCF'), local('BonvenoCF'), url('Fuentes/BonvenoCF/BonvenoCF.woff') format('woff'), url('Fuentes/BonvenoCF/BonvenoCF.ttf') format('truetype'), url('Fuentes/BonvenoCF/BonvenoCF.svg#Notethis') format('svg');
+}
+
+@font-face {
+    font-family: 'Tiza';
+    src: url('Fuentes/Tiza/Tiza.eot');
+    src: local('Tiza'), local('Tiza'), url('Fuentes/Tiza/Tiza.woff') format('woff'), url('Fuentes/Tiza/Tiza.ttf') format('truetype'), url('Fuentes/Tiza/Tiza.svg#Notethis') format('svg');
+}
+
+body{
+    background: #CDCDCD; 
+}
+
+/*Barra de progreso General*/
+#contenedor{
+    margin:0 auto;
+    text-align:center;
+    width:360px;
+}
+
+#contenedor2{
+    position:absolute;
+    top:10%;
+    left:35%;
+    right:30%;
+    text-align:center;
+    width:400px;
+    -moz-box-shadow: 2px 2px 8px  #28467D;
+    -webkit-box-shadow: 2px 2px 8px  #28467D;
+}
+
+
+
+@-webkit-keyframes animate-stripes {
+    0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
+@-moz-keyframes animate-stripes {
+    0% {background-position: 0 0;} 100% {background-position: 60px 0;}
+}
+
+/*Barra de titulo*/
+.t {
+
+    border-radius: 5px;
+    background-color:green;
+    font-family: BonvenoCF, Verdana, Arial, sans-serif;
+    font-size:30px;
+    color:#000000;
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(36,101,24)),
+        color-stop(1, rgb(83,209,61))
+        );
+    background-image: -webkit-linear-gradient(
+        center bottom,
+        rgb(36,101,24)    37%,
+        rgb(83,209,61) 69%
+        );
+
+    text-align: center;
+
+}
+
+/*Botón de inicio */
+.degradar { 	
+    display:none;
+
+    background: #6B6B6B; /* Old browsers */
+    background-image: -moz-linear-gradient(center bottom,rgb(36,101,24)  37%,rgb(83,209,61) 69%);
+    background-image: -ms-linear-gradient(center bottom,rgb(36,101,24)  37%,rgb(83,209,61) 69%);
+    background-image: -o-linear-gradient(center bottom,rgb(36,101,24)  37%,rgb(83,209,61) 69%);
+    background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0, rgb(36,101,24)),
+        color-stop(1, rgb(83,209,61)));
+    background-image: -webkit-linear-gradient(center bottom,rgb(36,101,24)  40%,rgb(83,209,61) 60%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3e2c7', endColorstr='#e8cdb2',GradientType=0 ); /* IE6-9 */
+    position:absolute;
+    left:40%;
+    bottom:10%;
+    width:300px;
+    height:50px;
+    border-radius:10px;
+    font-family:Tiza, Verdana, Arial, sans-serif;
+    font-size:15px;
+    text-align:center;
+    padding-top:20px;
+    font-color:#400040;
+    cursor:pointer; 
+    -moz-box-shadow: 2px 2px 8px  #28467D;
+    -webkit-box-shadow: 2px 2px 8px  #28467D;
+
+}
+
+.a:link {text-decoration:none;color:#000000;} 
+.a:hover { color:#FFFFFF; }
+.a:active{color:#DEC11F; cursor:pointer; }
+.a:visited{color:#000000 }
