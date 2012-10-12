@@ -4,7 +4,7 @@
     Author     : Mely
 --%>
 
-<%@page import="com.sun.org.apache.regexp.internal.REDebugCompiler"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
@@ -34,7 +34,7 @@
             <div id="titulo">
                 <p id="title">CORPORACIÓN<br>UNIVERSITARIA <br>ADVENTISTA</p>
             </div>
-            <form action="Ingresar?accion=2" method="POST" id="formIngreso">
+            <form action="Ingresar?accion=1" method="POST" id="formIngreso">
                 <div id="login1">
                     Correo Electrónico: <br />
                     <input id="email1" type="text" title="mail@ejemplo.com" name="login" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required /><br />

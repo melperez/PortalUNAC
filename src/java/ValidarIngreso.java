@@ -5,7 +5,6 @@
 
 import java.sql.*;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -34,14 +33,10 @@ public class ValidarIngreso extends HttpServlet {
             throws ServletException, IOException {
 
         String accion = request.getParameter("accion");
-        int action = Integer.parseInt(accion);
 
         String titulo = "";
-        String contenido = "";
-        String contenido2 = "";
-        String link1 = "";
-        String link2 = "";
-        boolean error = false;
+        String contenido;
+
         RequestDispatcher vista;
 
         //Datos para la conexion BD 
@@ -72,127 +67,65 @@ public class ValidarIngreso extends HttpServlet {
             System.out.println("Error conectando DB");
         }
 
-        switch (action) {
+        if (accion.equals("0")) {
             //Ir a pagina oficial UNAC
-            case 0:
-                response.sendRedirect("http://www.unac.edu.co");
-                break;
+            response.sendRedirect("http://www.unac.edu.co");
 
-            //Registro    
-            case 1:
-
-                String nombre = request.getParameter("firstname");
-                String apellido = request.getParameter("lastname");
-                String correo2 = request.getParameter("email");
-                String password = request.getParameter("password");
-                String telefono = request.getParameter("digits");
-                int perfil = 2;
-                int estado = 0;
-                String Gen = request.getParameter("genero");
-                int genero;
-                if (Gen.equals("Masculino")) {
-                    genero = 1;
-                } else {
-                    genero = 2;
-                }
-
-                sql = "insert into usuarios values ( '" + correo2 + "', '"
-                        + password + "', " + perfil + ", '" + nombre + "', '" + apellido + "', " + genero + ", '"
-                        + telefono + "', " + estado + ")";
-
-                try {
-                    sentencia = conexion.createStatement();
-                    sentencia.execute(sql);
-                    resultado = sentencia.getResultSet();
-                    resultado.next();
-
-                } catch (SQLIntegrityConstraintViolationException b) {
-                    contenido2 = "<p>El Usuario " + correo2 + " ya se encuentra registrado,"
-                            + " por favor ingresa otro email o inicia sesión.</p>";
-                    error = true;
-                } catch (NullPointerException a) {
-
-                    contenido2 = "<p>!Bienvenido " + nombre + " " + apellido + " usted se ha registrado exitosamente!<b/>"
-                            + "<br/>Usuario: " + correo2 + "<br/> Contraseña: " + password + "</p>";
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    try {
-                        sentencia.close();
-                        conexion.close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-
-                }
-
-                request.setAttribute("contenido2", contenido2);
-                request.setAttribute("error", error);
-                vista = request.getRequestDispatcher("index.jsp");
-                vista.forward(request, response);
-                break;
-
+        } else {
             //Validacion de Login     
-            case 2:
+            String correo = request.getParameter("login");
+            String pass = request.getParameter("pass");
+            
+            sql = "select nombre, estado, login, perfil from usuarios where login ='" + correo + "' AND clave = '" + pass + "'";
+            
+            try {
+                sentencia = conexion.createStatement();
+                sentencia.execute(sql);
+                resultado = sentencia.getResultSet();
 
-                String correo = request.getParameter("login");
-                String pass = request.getParameter("pass");
-                sql = "select nombre, estado, login, perfil from usuarios where login ='" + correo + "' AND clave = '" + pass + "'";
-                try {
-                    sentencia = conexion.createStatement();
-                    sentencia.execute(sql);
-                    resultado = sentencia.getResultSet();
 
-
-                    if (resultado.next()) {
-                        String name = resultado.getString("nombre");
-                        String valido = resultado.getString("estado");
-                        String user = resultado.getString("login");
-
-                        if (name.equals("Administrador")) {
-                            titulo = "Bienvenido";
-                            contenido = "Administrador a iniciado sesión correctamente!";
-                            vista = request.getRequestDispatcher("Home.jsp");
-                        } else if (valido.equals("0")) {
-                            contenido = "Lo sentimos, el usuario " + user + " no se encuentra activo, favor comunicarse con el administrador !";
-                            vista = request.getRequestDispatcher("index.jsp");
-                        } else {
-                            titulo = "Bienvenido";
-                            contenido = name + " a iniciado sesión correctamente!";
-                            vista = request.getRequestDispatcher("Home.jsp");
-                        }
-                        
-                    } else {
-
-                        contenido = "Correo o contraseña incorrecta o no se encuentra registrado !";
+                if (resultado.next()) {
+                    String name = resultado.getString("nombre");
+                    String valido = resultado.getString("estado");
+                    String user = resultado.getString("login");
+                    
+                    if (name.equals("Administrador")) {
+                        titulo = "Bienvenido";
+                        contenido = "Administrador a iniciado sesión correctamente!";
+                        vista = request.getRequestDispatcher("Home.jsp");
+                    } else if (valido.equals("0")) {
+                        contenido = "Lo sentimos, el usuario " + user + " no se encuentra activo, favor comunicarse con el administrador !";
                         vista = request.getRequestDispatcher("index.jsp");
+                    } else {
+                        titulo = "Bienvenido";
+                        contenido = name + " a iniciado sesión correctamente!";
+                        vista = request.getRequestDispatcher("Home.jsp");
                     }
+                    
+                     request.setAttribute("perfil", resultado.getString("perfil"));
 
-                    request.setAttribute("perfil", resultado.getString("perfil"));
-                    request.setAttribute("contenido", contenido);
-                    request.setAttribute("Titulo", titulo);
-                    vista.forward(request, response);
+                } else {
 
+                    contenido = "Correo o contraseña incorrecta o no se encuentra registrado !";
+                    vista = request.getRequestDispatcher("index.jsp");
+                }
+                
+                request.setAttribute("contenido", contenido);
+                request.setAttribute("Titulo", titulo);
+                vista.forward(request, response);
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    sentencia.close();
+                    conexion.close();
                 } catch (SQLException ex) {
                     Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, ex);
-                } finally {
-                    try {
-                        sentencia.close();
-                        conexion.close();
-                    } catch (SQLException ex) {
-                        Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-
                 }
 
-                break;
 
-
-
-
+            }
         }
 
 

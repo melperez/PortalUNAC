@@ -8,6 +8,7 @@
     String perfil = (String) request.getAttribute("perfil");
     String titulo = (String) request.getAttribute("Titulo"); //Obtener titulo
     String mensaje = (String) request.getAttribute("contenido"); //Obtener mensaje 
+    String msg = (String) request.getAttribute("msj");
 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -35,8 +36,19 @@
                 <p id="title">CORPORACIÓN<br>UNIVERSITARIA <br>ADVENTISTA</p>
             </div>
             <%
+
                 if (mensaje == null) {
-                    mensaje = "No hay mensaje";
+                    mensaje = "";
+                }
+
+                if (msg == null) {
+                    msg = "";
+                }
+                if (perfil == null){
+                    perfil = "1";
+                }
+                if(titulo==null){
+                    titulo="";
                 }
             %>
 
@@ -79,7 +91,8 @@
         </div>
         <div class='t' id='fondo' style="font-size:20px; width: 90%; height: 100%" >
             <br/>
-            <br/>
+            <br/> 
+            <%=msg%>
             <br/>
             <hr/>
             <br/>CORPORACION UNIVERSITARIA ADVENTISTA - UNAC

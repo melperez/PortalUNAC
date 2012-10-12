@@ -30,7 +30,7 @@
         <div id="titulo" style="font-family:BonvenoCF, Arial, sans-serif; font-size:15px; width:470px; height:360px; text-shadow:none; padding-top:0px">
             <div class="t" id="b2" style=" padding:10%; font-family:BonvenoCF, Arial, sans-serif; font-size:15px; width:430px; height:610px; text-shadow:none; padding-top:3px">
                 <h3 style="color:#FFFFFF; text-shadow:2px 2px 2px #646464">Registrese en Nuestro Portal</h3>
-                <form action="Ingresar?accion=1" method="POST" id="signupForm" target="_top" style="color:#FFFFFF; text-align:justify; text-shadow:2px 2px 2px #646464">
+                <form action="Controlar?accion=Registrar" method="POST" id="signupForm" target="_top" style="color:#FFFFFF; text-align:justify; text-shadow:2px 2px 2px #646464">
 
                     <p>
                         <label for="firstname">Nombre: </label><br/>
