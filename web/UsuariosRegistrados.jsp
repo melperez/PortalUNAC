@@ -13,6 +13,8 @@
 //Obtener el arreglo de estudiantes enviado en la solicitud
     ArrayList<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
     int cont = 0;
+    String mensaje = (String) request.getAttribute("msj");
+
 %>
 
 <!DOCTYPE html>
@@ -87,7 +89,7 @@
                         <th scope="col">Estado</th>
                         <th scope="col">Eliminar</th>
                         <th scope="col">Editar</th>
-                        
+
                     </tr>
                 </thead>
                 <%
@@ -139,6 +141,14 @@
                 %>
 
             </table>
+            <%
+                if (mensaje == null) {
+                    mensaje = "";
+                }
+            %>
+            <br/>
+            <br/>
+            <p style="color: red; font-weight: bold"><%=mensaje%></p>
             <br/>
             <hr/>
             <br/>CORPORACION UNIVERSITARIA ADVENTISTA - UNAC

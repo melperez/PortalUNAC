@@ -4,6 +4,10 @@
     Author     : Mely
 --%>
 
+<%
+    String accion = "Registrar";
+    String login = request.getParameter("email");
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,9 +62,9 @@
                     </p>
                     <p>
                         <label for="genero">G&eacutenero:</label><br/>
-                        <input id="genero" name="genero" class="requiered" style="font-family:BonvenoCF, Arial, sans-serif; font-size:15px; width:400px; height:30px; border-radius:10px; border:solid; border-color:#C0C0C0" required/>
+                        <input id="genero" name="genero" value="" class="requiered" style="font-family:BonvenoCF, Arial, sans-serif; font-size:15px; width:400px; height:30px; border-radius:10px; border:solid; border-color:#C0C0C0" required/>
                         <datalist>
-                            <option value="Select">Selecciona un g&eacutenero</option>
+                            <option value="Select" >Selecciona un g&eacutenero</option>
                             <option value="Masculino">Masculino</option>     
                             <option value="Femenino">Femenino</option>
                         </datalist>
@@ -68,7 +72,10 @@
                     <p>
                         <input id="Registrar" class="ui-state-default ui-corner-all" style="width: 200px; height:35px; cursor: pointer" type="submit" value="Registrarse" />
                     </p>
-
+                        <input type="hidden" name="accion" value="<%=accion%>" />
+                        <input type="hidden" name="accion" value="<%=login%>" />
+                        
+                        
                 </form>
             </div>	 
         </div>

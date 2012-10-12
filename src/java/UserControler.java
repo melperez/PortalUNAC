@@ -220,47 +220,45 @@ public class UserControler extends HttpServlet {
             System.out.println("Error conectando DB");
         }
 
-            sql = "select distinct login, Nombre, apellidos, teléfono, nombreGénero, nombrePerfil, nombreEstado"
-                    + "  from usuarios, generos, estados, perfiles where genero = generos.id AND "
-                    + "perfil = perfiles.id AND estado = estados.id_estado";
+        sql = "select distinct login, clave, Nombre, apellidos, teléfono, nombreGénero, nombrePerfil, nombreEstado"
+                + "  from usuarios, generos, estados, perfiles where genero = generos.id AND "
+                + "perfil = perfiles.id AND estado = estados.id_estado";
 
-            try {
-                
-                sentencia = conexion.createStatement();
-                sentencia.execute(sql);
-                resultado = sentencia.getResultSet();
+        try {
 
-                ArrayList Usuarios = new ArrayList();
-                while (resultado.next()) //si existen los datos, se guardan
-                {
-                    Usuario e = new Usuario(resultado.getString(1), resultado.getString(2),
-                            resultado.getString(3), resultado.getString(4), resultado.getString(5), resultado.getString(6),
-                            resultado.getString(7));
+            sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+            resultado = sentencia.getResultSet();
 
-                    Usuarios.add(e);
-                }
+            ArrayList Usuarios = new ArrayList();
+            while (resultado.next()) //si existen los datos, se guardan
+            {
+                Usuario e = new Usuario(resultado.getString(1), resultado.getString(2),
+                        resultado.getString(3), resultado.getString(4), resultado.getString(5), resultado.getString(6),
+                        resultado.getString(7), resultado.getString(8));
 
-                request.setAttribute("usuarios", Usuarios);
-
-                request.getRequestDispatcher("UsuariosRegistrados.jsp").forward(request, response);
-
-
-            } catch (SQLException e) {
-                System.out.println("Error conectando DB");
-
-            } finally {
-                try {
-                    sentencia.close();
-                    conexion.close();
-                } catch (SQLException a) {
-                    Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, a);
-                }
+                Usuarios.add(e);
             }
-        
+
+            request.setAttribute("usuarios", Usuarios);
+
+            request.getRequestDispatcher("UsuariosRegistrados.jsp").forward(request, response);
+
+
+        } catch (SQLException e) {
+            System.out.println("Error conectando DB");
+
+        } finally {
+            try {
+                sentencia.close();
+                conexion.close();
+            } catch (SQLException a) {
+                Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, a);
+            }
+        }
+
     }
 //Editar Datos de Usuarios Registrados
-
-    
 
     private void editar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -274,11 +272,59 @@ public class UserControler extends HttpServlet {
 //Eliminar Usuarios    
     private void eliminar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher vista;
-        String mensaje = "<img style='text-align:center; width: 40%; height: 50%' src='http://www.mat.ucm.es/catedramdeguzman/drupal//sites/default/files/en_construccion.png'/>";
-        request.setAttribute("msj", mensaje);
-        vista = request.getRequestDispatcher("Home.jsp");
-        vista.forward(request, response);
+
+        String login = request.getParameter("ID");
+
+        //Datos para la conexion BD 
+        String driver = "com.mysql.jdbc.Driver";
+        String urlDB = "jdbc:mysql://localhost/dbportalUNAC?";
+        String userDB = "PortalUNAC";
+        String passDB = "ju4nc4ymeli34";
+
+        //Objetos para la conexion con la BD
+        Connection conexion = null;
+        Statement sentencia = null;
+        int resultado = 0;
+        String sql;
+
+        //Cargar Driver
+        try {
+
+            Class.forName(driver).newInstance();
+            conexion = DriverManager.getConnection(urlDB, userDB, passDB);
+
+        } catch (IllegalAccessException e1) {
+            System.out.println("Error cargando Driver");
+        } catch (InstantiationException e1) {
+            System.out.println("Error cargando Driver");
+        } catch (ClassNotFoundException e1) {
+            System.out.println("Error cargando Driver");
+        } catch (SQLException e2) {
+            System.out.println("Error conectando DB");
+        }
+
+        sql = "delete from usuarios where login = '" + login + "'";
+
+        try {
+
+            sentencia = conexion.createStatement();
+            sentencia.execute(sql);
+            resultado = sentencia.executeUpdate(sql);
+
+            request.setAttribute("msj", "El Usuario se ha eliminado exitosamente!");
+
+        } catch (SQLException e) {
+            System.out.println("Error conectando DB");
+
+        } finally {
+            try {
+                sentencia.close();
+                conexion.close();
+            } catch (SQLException a) {
+                Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, a);
+            }
+        }
+        consultar(request, response);
     }
 
 //Habilitar Usuarios    
