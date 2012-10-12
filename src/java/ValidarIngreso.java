@@ -139,7 +139,7 @@ public class ValidarIngreso extends HttpServlet {
 
                 String correo = request.getParameter("login");
                 String pass = request.getParameter("pass");
-                sql = "select nombre, estado, login from usuarios where login ='" + correo + "' AND clave = '" + pass + "'";
+                sql = "select nombre, estado, login, perfil from usuarios where login ='" + correo + "' AND clave = '" + pass + "'";
                 try {
                     sentencia = conexion.createStatement();
                     sentencia.execute(sql);
@@ -154,7 +154,6 @@ public class ValidarIngreso extends HttpServlet {
                         if (name.equals("Administrador")) {
                             titulo = "Bienvenido";
                             contenido = "Administrador a iniciado sesión correctamente!";
-                            link1 = "Habilitar usuarios";
                             vista = request.getRequestDispatcher("Home.jsp");
                         } else if (valido.equals("0")) {
                             contenido = "Lo sentimos, el usuario " + user + " no se encuentra activo, favor comunicarse con el administrador !";
@@ -162,8 +161,6 @@ public class ValidarIngreso extends HttpServlet {
                         } else {
                             titulo = "Bienvenido";
                             contenido = name + " a iniciado sesión correctamente!";
-                            link1 = "Consultar Notas";
-                            link2 = "Historial Académico";
                             vista = request.getRequestDispatcher("Home.jsp");
                         }
                         
@@ -173,8 +170,7 @@ public class ValidarIngreso extends HttpServlet {
                         vista = request.getRequestDispatcher("index.jsp");
                     }
 
-                    request.setAttribute("link1", link1);
-                    request.setAttribute("link2", link2);
+                    request.setAttribute("perfil", resultado.getString("perfil"));
                     request.setAttribute("contenido", contenido);
                     request.setAttribute("Titulo", titulo);
                     vista.forward(request, response);
