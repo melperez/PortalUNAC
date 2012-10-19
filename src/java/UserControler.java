@@ -40,7 +40,7 @@ public class UserControler extends HttpServlet {
 
         //Parámetro Acción quien define la acción que se realizará con los datos
         String accion = request.getParameter("accion");
-
+        
         //Registrar Usuarios
         if (accion.equals("Registrar")) {
             registrar(request, response);
@@ -262,11 +262,70 @@ public class UserControler extends HttpServlet {
 
     private void editar(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         
+        //Datos a modificar.
+      /*  String nombre = request.getParameter("firstname");
+        String apellido = request.getParameter("lastname");
+        String correo2 = request.getParameter("email");
+        String password = request.getParameter("password");
+        String telefono = request.getParameter("digits");
+        String Gen = request.getParameter("genero");
+
         RequestDispatcher vista;
-        String mensaje = "<img style='text-align:center; width: 40%; height: 50%' src='http://www.mat.ucm.es/catedramdeguzman/drupal//sites/default/files/en_construccion.png'/>";
-        request.setAttribute("msj", mensaje);
-        vista = request.getRequestDispatcher("Home.jsp");
-        vista.forward(request, response);
+        //Datos de la conexion
+        String driver = "com.mysql.jdbc.Driver";
+        String urlDB = "jdbc:mysql://localhost/test";
+        String userBD = "usuarioPrueba";
+        String passBD = "123456";
+
+        //Objetos para manipular la conexion y los datos
+        Connection con = null;//Objeto para la conexion
+        Statement sentencia = null;//Objeto para definir y ejecutar las consultas sql
+        String sql = "";
+
+        try {
+            //CARGAR DRIVER
+            Class.forName(driver);
+        } catch (Exception e) {
+            System.out.println("No se ha podido cargar el Driver de MySql");
+            request.getRequestDispatcher("/Error.jsp").include(request, response);
+        }
+        try {
+            //ESTABLECER CONEXION
+            con = DriverManager.getConnection(urlDB, userBD, passBD);
+            System.out.println("Conectado ...");
+
+            //Definición de Sentencia SQL
+            sql = "UPDATE USUARIOS SET snombre='" + snombre + "', "
+                    + "sapellido='" + sapellido + "', "
+                    + "stelefono='" + stelefono + "', "
+                    + "sclave='" + sclave + "', "
+                    + "sgenero=b'" + sgenero + "', " 
+                    + "nidPerfil=" + perfil + " "
+                    + "WHERE semail='" + semail + "'";
+
+            //Ejecutar sentencia
+            sentencia = con.createStatement();
+            int filasafectadas = sentencia.executeUpdate(sql);
+            
+            System.out.println("Actualizacion exitosa ! ...");
+            request.setAttribute("mensaje", "Registro modificado exitosamente !");
+            consultar(request, response);
+            //request.getRequestDispatcher("/DatosIngresados.jsp").include(request, response);
+
+        } catch (SQLException ex) {
+            request.getRequestDispatcher("/Error.jsp").include(request, response);
+            System.out.println("No se ha podido Insertar, o el SQL esta mal formado " + sql);
+        } finally {
+            try {
+                //Liberar recursos
+                sentencia.close();
+                //cerrar conexion
+                con.close();
+            } catch (SQLException ex) {
+                request.getRequestDispatcher("/Error.jsp").include(request, response);
+            }
+        }*/
     }
 
 //Eliminar Usuarios    
@@ -274,56 +333,65 @@ public class UserControler extends HttpServlet {
             throws ServletException, IOException {
 
         String login = request.getParameter("ID");
+        String admin = request.getParameter("login2");
 
         //Datos para la conexion BD 
         String driver = "com.mysql.jdbc.Driver";
         String urlDB = "jdbc:mysql://localhost/dbportalUNAC?";
         String userDB = "PortalUNAC";
         String passDB = "ju4nc4ymeli34";
+        String msj;
 
-        //Objetos para la conexion con la BD
-        Connection conexion = null;
-        Statement sentencia = null;
-        int resultado = 0;
-        String sql;
+        //if(login.equals(admin)) {  *Este codigo no me dio, no supe como pasar el parametro que tenía en HOME a ese servlet.
+        if (login.equals("admin@unac.edu.co")) {
+            msj = "El Usuario Administrador no puede ser eliminado!!";
 
-        //Cargar Driver
-        try {
+        } else {
 
-            Class.forName(driver).newInstance();
-            conexion = DriverManager.getConnection(urlDB, userDB, passDB);
+            msj = "El Usuario se ha eliminado correctamente!!";
 
-        } catch (IllegalAccessException e1) {
-            System.out.println("Error cargando Driver");
-        } catch (InstantiationException e1) {
-            System.out.println("Error cargando Driver");
-        } catch (ClassNotFoundException e1) {
-            System.out.println("Error cargando Driver");
-        } catch (SQLException e2) {
-            System.out.println("Error conectando DB");
-        }
+            //Objetos para la conexion con la BD
+            Connection conexion = null;
+            Statement sentencia = null;
+            int resultado;
+            String sql;
 
-        sql = "delete from usuarios where login = '" + login + "'";
-
-        try {
-
-            sentencia = conexion.createStatement();
-            sentencia.execute(sql);
-            resultado = sentencia.executeUpdate(sql);
-
-            request.setAttribute("msj", "El Usuario se ha eliminado exitosamente!");
-
-        } catch (SQLException e) {
-            System.out.println("Error conectando DB");
-
-        } finally {
+            //Cargar Driver
             try {
-                sentencia.close();
-                conexion.close();
-            } catch (SQLException a) {
-                Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, a);
+
+                Class.forName(driver).newInstance();
+                conexion = DriverManager.getConnection(urlDB, userDB, passDB);
+
+            } catch (IllegalAccessException e1) {
+                System.out.println("Error cargando Driver");
+            } catch (InstantiationException e1) {
+                System.out.println("Error cargando Driver");
+            } catch (ClassNotFoundException e1) {
+                System.out.println("Error cargando Driver");
+            } catch (SQLException e2) {
+                System.out.println("Error conectando DB");
+            }
+
+            try {
+                sentencia = conexion.createStatement();
+                sql = "delete from usuarios where login = '" + login + "'";
+                sentencia.execute(sql);
+                resultado = sentencia.executeUpdate(sql);
+
+            } catch (SQLException e) {
+                System.out.println("Error conectando DB");
+
+            } finally {
+                try {
+                    sentencia.close();
+                    conexion.close();
+                } catch (SQLException a) {
+                    Logger.getLogger(ValidarIngreso.class.getName()).log(Level.SEVERE, null, a);
+                }
             }
         }
+
+        request.setAttribute("msj", msj);
         consultar(request, response);
     }
 

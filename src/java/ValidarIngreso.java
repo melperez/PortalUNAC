@@ -88,6 +88,7 @@ public class ValidarIngreso extends HttpServlet {
                     String name = resultado.getString("nombre");
                     String valido = resultado.getString("estado");
                     String user = resultado.getString("login");
+                    request.setAttribute("login",user);
                     
                     if (name.equals("Administrador")) {
                         titulo = "Bienvenido";
@@ -109,6 +110,7 @@ public class ValidarIngreso extends HttpServlet {
                     contenido = "Correo o contraseña incorrecta o no se encuentra registrado !";
                     vista = request.getRequestDispatcher("index.jsp");
                 }
+                
                 
                 request.setAttribute("contenido", contenido);
                 request.setAttribute("Titulo", titulo);

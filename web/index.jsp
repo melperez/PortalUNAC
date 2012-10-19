@@ -25,7 +25,7 @@
 
     </head>
     <body>
-
+        
         <!--Encabezado e Inicio de Sesion><!-->
         <div id="encabezado">
             <div id="imagen">

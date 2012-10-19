@@ -9,7 +9,7 @@
     String titulo = (String) request.getAttribute("Titulo"); //Obtener titulo
     String mensaje = (String) request.getAttribute("contenido"); //Obtener mensaje 
     String msg = (String) request.getAttribute("msj");
-
+    String login = (String) request.getAttribute("login");
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -28,6 +28,7 @@
 
     </head>
     <body background='#CDCDCD'style='padding-top:1%' >
+        <p style="text-align: right">usuario activo: <%=login%></p>
         <div id="encabezado" style="width: 90% ">
             <div id="imagen">
                 <img style="margin-left:auto;" id="UNAC" src="Images/Logo.gif" height="150px" width="150px" alt="Encabezado">
