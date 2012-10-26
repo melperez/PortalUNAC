@@ -45,6 +45,7 @@ public final class Registro_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
 
     String accion = "Registrar";
+    String login = request.getParameter("email");
 
       out.write("\r\n");
       out.write("\r\n");
@@ -73,7 +74,7 @@ public final class Registro_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <div id=\"titulo\" style=\"font-family:BonvenoCF, Arial, sans-serif; font-size:15px; width:470px; height:360px; text-shadow:none; padding-top:0px\">\r\n");
       out.write("            <div class=\"t\" id=\"b2\" style=\" padding:10%; font-family:BonvenoCF, Arial, sans-serif; font-size:15px; width:430px; height:610px; text-shadow:none; padding-top:3px\">\r\n");
       out.write("                <h3 style=\"color:#FFFFFF; text-shadow:2px 2px 2px #646464\">Registrese en Nuestro Portal</h3>\r\n");
-      out.write("                <form action=\"Controlar?accion=Registrar\" method=\"POST\" id=\"signupForm\" target=\"_top\" style=\"color:#FFFFFF; text-align:justify; text-shadow:2px 2px 2px #646464\">\r\n");
+      out.write("                <form action=\"Controlar\" method=\"POST\" id=\"signupForm\" target=\"_top\" style=\"color:#FFFFFF; text-align:justify; text-shadow:2px 2px 2px #646464\">\r\n");
       out.write("\r\n");
       out.write("                    <p>\r\n");
       out.write("                        <label for=\"firstname\">Nombre: </label><br/>\r\n");
@@ -114,6 +115,11 @@ public final class Registro_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                        <input type=\"hidden\" name=\"accion\" value=\"");
       out.print(accion);
       out.write("\" />\r\n");
+      out.write("                        <input type=\"hidden\" name=\"id\" value=\"");
+      out.print(login);
+      out.write("\" />\r\n");
+      out.write("                        \r\n");
+      out.write("                        \r\n");
       out.write("                </form>\r\n");
       out.write("            </div>\t \r\n");
       out.write("        </div>\r\n");
